@@ -1,0 +1,6 @@
+tensorlake
+google-adk
+google-adk[extensions]
+arize-otel
+arize-phoenix-otel
+openinference-instrumentation-google-adk
