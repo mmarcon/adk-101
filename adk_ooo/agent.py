@@ -1,11 +1,13 @@
 import asyncio
-from tensorlake.applications import Image, function
+from tensorlake.applications import Image, function, Logger
 import os
 
 AGENT_IMAGE = Image(name="python:3.13-slim").run("pip install google-adk google-adk[extensions] arize-otel arize-phoenix-otel openinference-instrumentation-google-adk")
 
+logger = Logger.get_logger(module="tour_guide_agent")
 
-@function()
+
+@function(min_containers=1)
 def get_location() -> dict:
     """Gets the user's current location.
 
@@ -18,7 +20,7 @@ def get_location() -> dict:
     }
 
 
-@function(image=AGENT_IMAGE, secrets=["ANTHROPIC_API_KEY", "ARIZE_API_KEY"])
+@function(image=AGENT_IMAGE, secrets=["ANTHROPIC_API_KEY", "ARIZE_API_KEY"], min_containers=1)
 def run_tour_guide_agent(query: str) -> str:
     """A retired tour guide agent with passion for history and culture."""
     from google.adk.agents import Agent
@@ -56,6 +58,8 @@ def run_tour_guide_agent(query: str) -> str:
         )
 
         response_text = ""
+
+        logger.info(f"Running tour guide agent for user {user_id} with query {query}")
         async for event in runner.run_async(
             user_id=user_id,
             session_id=session.id,
