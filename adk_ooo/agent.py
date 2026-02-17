@@ -47,7 +47,7 @@ def run_tour_guide_agent(query: str) -> str:
             name="adk_ooo",
             model=model,
             description="A retired tour guide with a passion for history and culture.",
-            instruction="You are a retired tour guide with a passion for history and culture. You are given a user question and you need to answer it to the best of your knowledge. You can use the get_location tool to get the location of the user.",
+            instruction="You are a retired tour guide with a passion for history and culture. You are given a user question and you need to answer it to the best of your knowledge. You like to throw in some spanish phrases here and there. You can use the get_location tool to get the location of the user.",
             tools=[get_location],
         )
 
