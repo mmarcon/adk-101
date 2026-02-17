@@ -20,7 +20,7 @@ def get_location() -> dict:
     }
 
 
-@function(image=AGENT_IMAGE, secrets=["ANTHROPIC_API_KEY", "ARIZE_API_KEY"], min_containers=1)
+@function(image=AGENT_IMAGE, secrets=["ANTHROPIC_API_KEY", "ARIZE_API_KEY"], min_containers=2)
 def run_tour_guide_agent(query: str) -> str:
     """A retired tour guide agent with passion for history and culture."""
     from google.adk.agents import Agent
